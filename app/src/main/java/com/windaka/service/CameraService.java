@@ -25,13 +25,15 @@ public class CameraService extends Service {
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getStringExtra("change");
-            if ("close".equalsIgnoreCase(action)) {
-                close();
-            } else if ("open".equalsIgnoreCase(action)) {
-                open();
-            } else {
-                Log.w(TAG, "Unsupported change:" + action);
+            String callstate = intent.getStringExtra("callstate");
+            switch (callstate){
+                case "OutgoingInit":
+                    open();
+                    break;
+                case "Released":
+                    close();
+                    break;
+                default:
             }
         }
     };
@@ -46,10 +48,9 @@ public class CameraService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        IntentFilter filter = new IntentFilter("com.windaka.service.CameraService");
+        IntentFilter filter = new IntentFilter("com.windaka.sip.callstate");
         registerReceiver(receiver, filter);
-        Log.i(TAG, "CameraService Start:" + version());
-        Log.i(TAG, "Register CameraService Receiver: com.windaka.service.CameraService[data=change@String]");
+        Log.i(TAG, "Register CameraService Receiver: com.windaka.sip.callstate, bundle=[callstate@String]");
     }
 
     @Override
@@ -57,8 +58,6 @@ public class CameraService extends Service {
         unregisterReceiver(receiver);
         super.onDestroy();
     }
-
-    private native String version();
 
     private native void open();
 

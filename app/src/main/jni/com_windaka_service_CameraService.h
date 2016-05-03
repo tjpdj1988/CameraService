@@ -9,7 +9,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define VERSION     "0.1 beta"
+#define VERSION     "Camera GPIO Service 0.1 beta"
 
 #define DEVICE_NAME "/dev/gpio_rw"
 
@@ -24,16 +24,9 @@ extern "C" {
 
 #define GPIO_IN     _IOR('H', 0x01, int)//设置引脚输入
 #define GPIO_OUT	_IOR('H', 0x02, int)//设置引脚输出
-#define GPIO_SET	_IOR('H', 0x03, int)//设置引脚输出高
-#define GPIO_CLEAR	_IOR('H', 0x04, int)//设置引脚输出低
+#define POWER_HIGH  _IOR('H', 0x03, int)//设置引脚输出高
+#define POWER_LOWER _IOR('H', 0x04, int)//设置引脚输出低
 #define GPIO_READ	_IOR('H', 0x05, int)//读取引脚高低电平
-/*
- * Class:     com_windaka_service_CameraService
- * Method:    version
- * Signature: ()Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_windaka_service_CameraService_version
-  (JNIEnv *, jobject);
 
 /*
  * Class:     com_windaka_service_CameraService
