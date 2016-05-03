@@ -21,16 +21,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent open = new Intent("com.windaka.service.CameraService");
-                open.putExtra("change", "open");
+                Intent open = new Intent("com.windaka.sip.callstate");
+                open.putExtra("callstate", "OutgoingInit");
                 sendBroadcast(open);
             }
         });
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent close = new Intent("com.windaka.service.CameraService");
-                close.putExtra("change", "close");
+                Intent close = new Intent("com.windaka.sip.callstate");
+                close.putExtra("callstate", "Released");
                 sendBroadcast(close);
             }
         });
